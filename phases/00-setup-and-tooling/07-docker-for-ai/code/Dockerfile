@@ -1,7 +1,8 @@
-FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+FROM nvidia/cuda:13.3.1-tensorrt-devel-ubuntu24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
@@ -25,11 +26,13 @@ RUN curl -sSL https://raw.githubusercontent.com/pypa/get-pip/3b73145063be545b649
 
 RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel
 
+# cu130 index carries native aarch64/Blackwell (sm_121, e.g. DGX Spark GB10) wheels;
+# torchaudio's cu130 releases lag torch/torchvision's version numbering, so it's pinned separately.
 RUN python -m pip install --no-cache-dir \
-    torch==2.6.0+cu124 \
-    torchvision==0.21.0+cu124 \
-    torchaudio==2.6.0+cu124 \
-    --index-url https://download.pytorch.org/whl/cu124
+    torch==2.13.0+cu130 \
+    torchvision==0.28.0+cu130 \
+    torchaudio==2.11.0+cu130 \
+    --index-url https://download.pytorch.org/whl/cu130
 
 RUN python -m pip install --no-cache-dir \
     numpy \
@@ -40,7 +43,8 @@ RUN python -m pip install --no-cache-dir \
     transformers \
     datasets \
     accelerate \
-    safetensors
+    safetensors \
+    qdrant-client
 
 WORKDIR /workspace
 
