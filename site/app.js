@@ -46,22 +46,23 @@
     var totalLessons = 0;
     var completeLessons = 0;
     var hasProgress = !!window.AIFSProgress;
+    var completePhases = 0;
     for (var i = 0; i < PHASES.length; i++) {
       var lessons = PHASES[i].lessons;
       totalLessons += lessons.length;
+      var phaseDone = 0;
       for (var j = 0; j < lessons.length; j++) {
-        var staticDone = lessons[j].status === 'complete';
         var userDone = false;
         if (hasProgress && lessons[j].url) {
           var lp = window.AIFSProgress.extractPath(lessons[j].url);
           if (lp) userDone = window.AIFSProgress.isLessonComplete(lp);
         }
-        if (staticDone || userDone) completeLessons++;
+        if (userDone) {
+          completeLessons++;
+          phaseDone++;
+        }
       }
-    }
-    var completePhases = 0;
-    for (var p = 0; p < PHASES.length; p++) {
-      if (PHASES[p].status === 'complete') completePhases++;
+      if (lessons.length > 0 && phaseDone === lessons.length) completePhases++;
     }
     return {
       lessons: totalLessons,
@@ -113,13 +114,12 @@
       var total = p.lessons.length;
       var done = 0;
       for (var j = 0; j < p.lessons.length; j++) {
-        var staticDone = p.lessons[j].status === 'complete';
         var userDone = false;
         if (hasProgress && p.lessons[j].url) {
           var lp = window.AIFSProgress.extractPath(p.lessons[j].url);
           if (lp) userDone = window.AIFSProgress.isLessonComplete(lp);
         }
-        if (staticDone || userDone) done++;
+        if (userDone) done++;
       }
       var statusClass = p.status.replace(/ /g, '-');
       var roman = toRoman(p.id);
