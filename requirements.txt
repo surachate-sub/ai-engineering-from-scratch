@@ -1,6 +1,8 @@
 numpy>=1.24
 matplotlib>=3.7
 jupyter>=1.0
+# On NVIDIA Blackwell GPUs (e.g. GB10 / DGX Spark, sm_121), install with:
+#   uv pip install --index-url https://download.pytorch.org/whl/cu130 torch torchvision torchaudio
 torch>=2.0
 torchvision>=0.15
 torchaudio>=2.0
