@@ -38,6 +38,7 @@
 ## Progress log
 | Date | Lesson | Quiz | Note |
 |------|--------|------|------|
+| 2026-11-19 | 01-math-foundations/01-linear-algebra-intuition | 2/3 | ลืมรวมพจน์แรกตอนทำ dot product, สลับเครื่องหมายตอนคูณ matrix, ยังไม่เห็นภาพว่า LoRA ใช้ low-rank อย่างไร |
 
 ## Review queue
-<!-- empty for now; learn adds lessons the quizzes flag -->
+- 01-math-foundations/01-linear-algebra-intuition: LoRA และ low-rank (ΔW = B×A ลดพารามิเตอร์ 16M เหลือ ~131K)
