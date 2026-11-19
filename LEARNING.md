@@ -39,6 +39,7 @@
 | Date | Lesson | Quiz | Note |
 |------|--------|------|------|
 | 2026-11-19 | 01-math-foundations/01-linear-algebra-intuition | 2/3 | ลืมรวมพจน์แรกตอนทำ dot product, สลับเครื่องหมายตอนคูณ matrix, ยังไม่เห็นภาพว่า LoRA ใช้ low-rank อย่างไร |
+| 2026-11-19 | 01-math-foundations/02-vectors-matrices-operations | 2/2 | warm-up บทก่อนพลาด dot product (สับสนกับมุม); บทนี้พลาดการจับคู่แถว×คอลัมน์ใน matmul, ขนาดผลคูณ (2×3)@(3×1), และ broadcasting (4,) กับ (4,1); ต้องสอนแยก transpose/determinant ก่อน quiz |
 
 ## Review queue
 - 01-math-foundations/01-linear-algebra-intuition: LoRA และ low-rank (ΔW = B×A ลดพารามิเตอร์ 16M เหลือ ~131K)
